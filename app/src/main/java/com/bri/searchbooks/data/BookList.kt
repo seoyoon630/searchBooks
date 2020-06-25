@@ -1,4 +1,4 @@
-package com.bri.searchbooks.main
+package com.bri.searchbooks.data
 
 import com.google.gson.annotations.SerializedName
 

@@ -16,10 +16,10 @@ ext {
     rxjava_version = '2.2.3'
     rxandroid_version = '2.1.0'
 
-    // glide 버전 ( 이미지 파싱 )
-    glide_version = '4.9.0'
+    // glide 버전
+    glide_version = "4.11.0"
 
-    // gson 버전 ( Json 파싱 )
+    // gson 버전
     gson_version = '2.8.5'
 
     //retrofit
@@ -30,4 +30,6 @@ ext {
 
 //    koin_version = '2.0.1'
     koin_version = '2.1.5'
+
+
 }

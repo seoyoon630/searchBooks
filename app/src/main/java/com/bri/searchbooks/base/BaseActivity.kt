@@ -19,13 +19,13 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         onBind()
-        onObserve()
+        onLoadOnce()
         onLoad()
     }
 
     open fun onBind() {}
 
-    open fun onObserve() {}
+    open fun onLoadOnce() {}
 
     open fun onLoad() {}
 

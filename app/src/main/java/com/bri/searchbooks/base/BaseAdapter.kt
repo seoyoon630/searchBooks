@@ -23,11 +23,18 @@ abstract class BaseAdapter<T>() : RecyclerView.Adapter<BaseHolder<T>>() {
         notifyItemRangeInserted(before, items.size)
     }
 
+    open fun clear() {
+        val size = items.size
+        this.items.clear()
+        notifyItemRangeRemoved(0, size)
+    }
+
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<T>
 
     abstract override fun getItemViewType(position: Int): Int
 
-    override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) = onBind(holder, items[position])
+    override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) =
+        onBind(holder, items[position])
 
     protected fun getItem(position: Int): T = items[position]
 

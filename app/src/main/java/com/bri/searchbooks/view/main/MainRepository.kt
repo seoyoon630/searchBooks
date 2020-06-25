@@ -1,5 +1,6 @@
-package com.bri.searchbooks.main
+package com.bri.searchbooks.view.main
 
+import com.bri.searchbooks.data.BookList
 import io.reactivex.Single
 
 interface MainRepository {
