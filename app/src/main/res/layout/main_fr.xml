@@ -10,9 +10,6 @@
             name="vm"
             type="com.bri.searchbooks.view.main.MainViewModel" />
 
-        <variable
-            name="adapter"
-            type="com.bri.searchbooks.view.main.adapter.MainAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,9 +32,22 @@
             android:text="@={vm.inputQuery}"
             app:layout_constraintBottom_toTopOf="@id/list"
             app:layout_constraintTop_toTopOf="parent"
-            app:setEnterFunction="@{vm::updateQuery}" />
+            app:setEnterFunction="@{vm::updateQuery}"
+            app:setRelatedRecyclerView="@{list}" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingStart="@dimen/half_padding"
+            android:paddingEnd="@dimen/half_padding"
+            android:src="@drawable/ic_remove"
+            app:layout_constraintBottom_toBottomOf="@id/query"
+            app:layout_constraintEnd_toEndOf="@id/query"
+            app:layout_constraintTop_toTopOf="@id/query"
+            app:setRelatedEditText="@{query}"
+            tools:background="#ddd" />
+
+        <com.bri.searchbooks.common.MainRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -49,7 +59,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/query"
-            app:setAdapter="@{adapter}"
             app:setScrollListener="@{()->vm.getBookList(vm.query)}"
             tools:listitem="@layout/book_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>

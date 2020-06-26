@@ -28,7 +28,6 @@ class MainFragment : BaseFragment() {
     override fun onLoadOnce() {
         super.onLoadOnce()
         binding.vm = vm
-        binding.adapter = MainAdapter { book -> mActivity?.showDetail(book) }.apply { addAll(vm.list) }
 
         if(vm.list.isEmpty()) {
             binding.query.showKeyBoard()

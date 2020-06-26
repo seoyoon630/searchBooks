@@ -1,12 +1,12 @@
 package com.bri.searchbooks.view.main.adapter
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bri.searchbooks.R
-import com.bri.searchbooks.base.BaseAdapter
+import com.bri.searchbooks.common.MainRecyclerView
 import com.bri.searchbooks.common.priceFormat
 import com.bri.searchbooks.data.Book
 
@@ -15,39 +15,35 @@ object MainBindingAdapters {
     var isFinish = true
 
     @JvmStatic
-    @BindingAdapter("app:setAdapter")
-    fun setOnItemClick(rv: RecyclerView, adapter : BaseAdapter<Any>) {
-        rv.adapter = adapter
+    @BindingAdapter("app:setScrollListener")
+    fun setScrollListener(rv: MainRecyclerView, function: () -> Unit) {
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            var lastVisibleIndex = -1
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val lastItemIndex = rv.myLayoutManager.findLastVisibleItemPosition()
+                // 애니메이션 처리
+                if (lastItemIndex > lastVisibleIndex) {
+                    lastVisibleIndex = lastItemIndex
+                    rv.myAdapter.setLastVisibleIndex(lastItemIndex)
+                }
+                // 스크롤 최하단에서 5개 미만으로 남았을 때
+                if (isFinish && itemCount - lastItemIndex < 5) {
+                    function()
+                    isFinish = false
+                }
+            }
+        })
     }
 
     @JvmStatic
     @Suppress("UNCHECKED_CAST")
     @BindingAdapter("app:addItems")
-    fun addItems(rv: RecyclerView, items: ArrayList<Book>?) {
+    fun addItems(rv: MainRecyclerView, items: ArrayList<Book?>?) {
         items?.let {
-            (rv.adapter as? MainAdapter)?.let {
-                it.set(items)
-                itemCount = it.itemCount
-                isFinish = true
-            }
-        }
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:setScrollListener")
-    fun setScrollListener(rv: RecyclerView, function: () -> Unit) {
-        (rv.layoutManager as? LinearLayoutManager)?.let { lm ->
-            rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    val lastItemIndex = lm.findLastVisibleItemPosition()
-                    // 스크롤 최하단에서 5개 미만으로 남았을 때
-                    if (isFinish && itemCount - lastItemIndex < 5) {
-                        function()
-                        isFinish = false
-                    }
-                }
-            })
+            rv.myAdapter.set(items)
+            itemCount = rv.myAdapter.itemCount
+            isFinish = true
         }
     }
 

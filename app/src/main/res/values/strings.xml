@@ -4,5 +4,6 @@
 
     <string name="on_searching">다음 목록을 불러오는 중입니다.\n잠시만 기다려주세요.</string>
     <string name="search_hint">책의 제목을 입력해주세요.</string>
+    <string name="empty_result">검색 결과가 없습니다</string>
 
 </resources>

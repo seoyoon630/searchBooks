@@ -1,6 +1,7 @@
 package com.bri.searchbooks.common
 
 import android.content.Context
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -29,12 +30,19 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("app:setEnterFunction")
-    fun setEnterFunction(v: EditText, function: () -> Unit) {
+    @BindingAdapter("app:setRelatedEditText")
+    fun setRelatedEditText(v: View, editText: EditText) {
+        v.setOnClickListener { editText.text.clear() }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:setEnterFunction", "app:setRelatedRecyclerView")
+    fun setEnterFunction(v: EditText, function: () -> Unit, relatedRecyclerView: MainRecyclerView) {
         v.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 function()
                 v.hideKeyBoard()
+                relatedRecyclerView.myAdapter.resetAnimationIndices()
                 return@setOnEditorActionListener true
             } else return@setOnEditorActionListener false
         }
