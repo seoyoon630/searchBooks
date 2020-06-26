@@ -1,25 +1,17 @@
 package com.bri.searchbooks.base
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
+    abstract val vm: BaseViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        parseExtra()
         loadOnce()
         reload()
-    }
-
-    protected fun parseExtra() {
-        try {
-            onParseExtra()
-        } catch (ignore: Exception) {
-        }
     }
 
     protected fun loadOnce() {
@@ -38,7 +30,6 @@ abstract class BaseFragment : Fragment() {
         onReload()
     }
 
-    protected open fun onParseExtra() {}
     protected open fun onLoadOnce() {}
     protected open fun onReload() {
         clear()

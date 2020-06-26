@@ -1,7 +1,5 @@
 package com.bri.searchbooks.common
 
-import android.view.KeyEvent
-import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
@@ -13,11 +11,6 @@ import com.bri.searchbooks.base.BaseAdapter
 import com.bumptech.glide.Glide
 
 object BindingAdapters {
-    @JvmStatic
-    @BindingAdapter("app:adapter")
-    fun setAdapter(rv: RecyclerView, adapter: BaseAdapter<Any>) {
-        rv.adapter = adapter
-    }
 
     @JvmStatic
     @BindingAdapter("app:src")
@@ -28,11 +21,9 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("app:listToText")
     fun setListToText(v: TextView, list: ArrayList<String>?) {
-        list?.let {
-            val sb = StringBuilder()
-            sb.append(it.joinToString(", "))
-            v.text = sb.toString()
-        }
+        val sb = StringBuilder()
+        list?.let { sb.append(it.joinToString(", ")) }
+        v.text = sb.toString()
     }
 
     @JvmStatic

@@ -9,6 +9,10 @@
         <variable
             name="vm"
             type="com.bri.searchbooks.view.main.MainViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.bri.searchbooks.view.main.adapter.MainAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +20,6 @@
         android:layout_height="match_parent"
         android:background="@color/bg">
 
-        <!--        app:setEnterFunction="@{()->vm.resetQuery(query.getText().toString())}" -->
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/query"
             style="@style/default_padding"
@@ -38,11 +41,16 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:clipChildren="false"
             android:orientation="vertical"
+            android:overScrollMode="never"
+            android:transitionGroup="false"
             app:addItems="@{vm.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/query"
-            app:setScrollListener="@{()->vm.getBookList(vm.query)}" />
+            app:setAdapter="@{adapter}"
+            app:setScrollListener="@{()->vm.getBookList(vm.query)}"
+            tools:listitem="@layout/book_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,25 +6,16 @@
 
     <data>
 
-        <import type="com.bri.searchbooks.common.ExtKt" />
-
         <variable
-            name="data"
+            name="book"
             type="com.bri.searchbooks.data.Book" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/shadow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_padding"
-        android:layout_marginTop="@dimen/half_padding"
-        android:layout_marginEnd="@dimen/default_padding"
-        android:layout_marginBottom="@dimen/half_padding"
-        android:background="@drawable/rounded_rect"
-        app:isOnSale="@{data}"
+        android:layout_height="match_parent"
         android:padding="@dimen/default_padding"
-        android:transitionGroup="true">
+        app:isOnSale="@{book}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/thumbnail"
@@ -35,15 +26,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.25"
-            app:src="@{data.thumbnail}"
+            app:src="@{book.thumbnail}"
             tools:background="#ddd" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/half_padding"
-            android:text="@{data.title}"
+            android:layout_marginStart="@dimen/default_padding"
+            android:text="@{book.title}"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/thumbnail"
@@ -59,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title"
-            app:listToText="@{data.authors}"
+            app:listToText="@{book.authors}"
             tools:text="Jim Haimann Heimann" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -67,13 +58,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_padding"
+            android:textColor="@color/price"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail"
             app:layout_constraintEnd_toStartOf="@id/status"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/author"
             app:layout_constraintVertical_bias="1"
-            app:setPrice="@{data}"
+            app:setPrice="@{book}"
             tools:text="22,500원" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -81,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_padding"
-            android:text="@{data.status}"
+            android:text="@{book.status}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/price"

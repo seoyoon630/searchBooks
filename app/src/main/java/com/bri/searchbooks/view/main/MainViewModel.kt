@@ -2,6 +2,8 @@ package com.bri.searchbooks.view.main
 
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseViewModel
 import com.bri.searchbooks.data.Book
@@ -10,15 +12,17 @@ import io.reactivex.schedulers.Schedulers
 class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
 
     var query: String = "ads"
-    var inputQuery : String = ""
+    var inputQuery: String = ""
     private var page: Int = 0
     var isSearching: Boolean = false
 
     val list = ObservableArrayList<Book>()
-
     private val isEnd = ObservableBoolean(false)
 
-    fun updateQuery(){
+    private val _showDetail = MutableLiveData<Book>()
+    val showDetail: LiveData<Book> get() = _showDetail
+
+    fun updateQuery() {
         this.query = inputQuery
         page = 0
         list.clear()
@@ -41,6 +45,10 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
                 e.printStackTrace()
                 isSearching = false
             })
-        } else if(isSearching) _message.postValue(R.string.on_searching)
+        } else if (isSearching) _message.postValue(R.string.on_searching)
+    }
+
+    fun showDetail(book: Book) {
+        _showDetail.postValue(book)
     }
 }

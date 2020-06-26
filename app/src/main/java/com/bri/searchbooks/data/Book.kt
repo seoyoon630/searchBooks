@@ -1,12 +1,15 @@
 package com.bri.searchbooks.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class BookList(
     @SerializedName("documents") val list: ArrayList<Book>,
     val meta: Meta
 )
 
+@Parcelize
 data class Book(
     val authors: ArrayList<String>,     // 도서 저자 리스트
     val contents: String,               // 도서 소개
@@ -20,7 +23,7 @@ data class Book(
     val title: String,                  // 도서 제목
     val translators: ArrayList<String>, // 도서 번역자 리스트
     val url: String                     // 도서 상세 URL
-)
+) : Parcelable
 
 data class Meta(
     val is_end: Boolean,
