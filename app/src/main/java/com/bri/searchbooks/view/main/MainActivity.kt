@@ -28,6 +28,6 @@ class MainActivity : BaseActivity() {
 
     override fun onLoad() {
         super.onLoad()
-        vm.getBookList("3836556324")
+        vm.getBookList("ads")
     }
 }

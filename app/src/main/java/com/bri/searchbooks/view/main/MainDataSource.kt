@@ -15,6 +15,7 @@ interface MainDataSource {
     @GET("/v3/search/book")
     fun getBookList(
         @Query("query", encoded = false) query: String = "",
-        @Query("size") size: Int = 50
+        @Query("size") size: Int = 50,
+        @Query("target") target : String = "title"
     ): Single<BookList>
 }

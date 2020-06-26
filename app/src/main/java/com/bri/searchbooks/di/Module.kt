@@ -1,6 +1,6 @@
 package com.bri.searchbooks.di
 
-import com.bri.searchbooks.ext.createNetService
+import com.bri.searchbooks.common.createNetService
 import com.bri.searchbooks.view.main.MainDataSource
 import com.bri.searchbooks.view.main.MainRepository
 import com.bri.searchbooks.view.main.MainRepositoryImpl
