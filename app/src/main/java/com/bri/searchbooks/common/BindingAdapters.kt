@@ -1,6 +1,8 @@
 package com.bri.searchbooks.common
 
+import android.content.Context
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,6 +34,7 @@ object BindingAdapters {
         v.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 function()
+                v.hideKeyBoard()
                 return@setOnEditorActionListener true
             } else return@setOnEditorActionListener false
         }

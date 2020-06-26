@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.transition.Explode
 import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseFragment
+import com.bri.searchbooks.common.showKeyBoard
 import com.bri.searchbooks.databinding.MainFrBinding
 import com.bri.searchbooks.view.main.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -28,6 +29,10 @@ class MainFragment : BaseFragment() {
         super.onLoadOnce()
         binding.vm = vm
         binding.adapter = MainAdapter { book -> mActivity?.showDetail(book) }.apply { addAll(vm.list) }
+
+        if(vm.list.isEmpty()) {
+            binding.query.showKeyBoard()
+        };
     }
 
     companion object {
