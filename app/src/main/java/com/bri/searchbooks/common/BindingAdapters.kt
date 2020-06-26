@@ -1,5 +1,9 @@
 package com.bri.searchbooks.common
 
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -7,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseAdapter
 import com.bumptech.glide.Glide
-import java.lang.StringBuilder
 
 object BindingAdapters {
     @JvmStatic
@@ -28,7 +31,18 @@ object BindingAdapters {
         list?.let {
             val sb = StringBuilder()
             sb.append(it.joinToString(", "))
-            v.setText(sb.toString())
+            v.text = sb.toString()
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:setEnterFunction")
+    fun setEnterFunction(v: EditText, function: () -> Unit) {
+        v.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                function()
+                return@setOnEditorActionListener true
+            } else return@setOnEditorActionListener false
         }
     }
 }

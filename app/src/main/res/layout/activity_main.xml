@@ -5,6 +5,7 @@
     tools:context=".view.main.MainActivity">
 
     <data>
+
         <variable
             name="vm"
             type="com.bri.searchbooks.view.main.MainViewModel" />
@@ -12,14 +13,36 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg">
+
+        <!--        app:setEnterFunction="@{()->vm.resetQuery(query.getText().toString())}" -->
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/query"
+            style="@style/default_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_padding"
+            android:background="@drawable/rounded_rect"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="@dimen/half_padding"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:text="@={vm.inputQuery}"
+            app:layout_constraintBottom_toTopOf="@id/list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setEnterFunction="@{vm::updateQuery}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
             app:addItems="@{vm.list}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/query"
+            app:setScrollListener="@{()->vm.getBookList(vm.query)}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

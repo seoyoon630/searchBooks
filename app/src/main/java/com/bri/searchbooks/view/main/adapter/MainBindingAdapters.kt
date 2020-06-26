@@ -3,12 +3,15 @@ package com.bri.searchbooks.view.main.adapter
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bri.searchbooks.R
 import com.bri.searchbooks.common.priceFormat
 import com.bri.searchbooks.data.Book
 
 object MainBindingAdapters {
+    var itemCount = 0
+    var isFinish = true
 
     @JvmStatic
     @Suppress("UNCHECKED_CAST")
@@ -16,7 +19,11 @@ object MainBindingAdapters {
     fun addItems(rv: RecyclerView, items: ArrayList<Book>?) {
         items?.let {
             if (rv.adapter == null) rv.adapter = MainAdapter()
-            (rv.adapter as? MainAdapter)?.addAll(items)
+            (rv.adapter as? MainAdapter)?.let {
+                it.set(items)
+                itemCount = it.itemCount
+                isFinish = true
+            }
         }
     }
 
@@ -46,4 +53,21 @@ object MainBindingAdapters {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter("app:setScrollListener")
+    fun setScrollListener(rv: RecyclerView, function: () -> Unit) {
+        (rv.layoutManager as? LinearLayoutManager)?.let { lm ->
+            rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val lastItemIndex = lm.findLastVisibleItemPosition()
+                    // 스크롤 최하단에서 5개 미만으로 남았을 때
+                    if(isFinish && itemCount - lastItemIndex < 5) {
+                        function()
+                        isFinish = false
+                    }
+                }
+            })
+        }
+    }
 }

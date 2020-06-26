@@ -8,11 +8,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity : AppCompatActivity() {
-    private val mProgress by lazy { createProgress() }
+    abstract val vm: BaseViewModel
 
+    private val mProgress by lazy { createProgress() }
     private val rootView by lazy { window.decorView.findViewById<View>(android.R.id.content) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +23,9 @@ abstract class BaseActivity : AppCompatActivity() {
         onBind()
         onLoadOnce()
         onLoad()
+
+        vm.isProgress.observe(this, Observer { it?.let { isProgress -> if (isProgress) showProgress(); else dismissProgress() } })
+        vm.message.observe(this, Observer { it?.let { message -> showSnackBar(message = resources.getString(message)) } })
     }
 
     open fun onBind() {}
