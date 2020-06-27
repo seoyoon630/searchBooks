@@ -29,6 +29,19 @@ object BindingAdapters {
         v.text = sb.toString()
     }
 
+
+    @JvmStatic
+    @BindingAdapter("app:setVisible")
+    fun setVisible(v: View, data: Any?) {
+        data?.let {
+            when (data) {
+                is String -> v.visibility = if (data.isEmpty()) View.GONE else View.VISIBLE
+                is Collection<*> -> v.visibility = if (data.isEmpty()) View.GONE else View.VISIBLE
+                else -> View.GONE
+            }
+        } ?: run { v.visibility = View.GONE }
+    }
+
     @JvmStatic
     @BindingAdapter("app:setRelatedEditText")
     fun setRelatedEditText(v: View, editText: EditText) {

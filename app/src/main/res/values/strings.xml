@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SearchBooks</string>
+    <string name="app_name">도서 검색</string>
     <string name="on_sale">정상판매</string>
 
     <string name="on_searching">다음 목록을 불러오는 중입니다.\n잠시만 기다려주세요.</string>

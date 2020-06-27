@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.bri.searchbooks.net.Net
 import io.reactivex.Single
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 inline fun <reified T> createNetService(net: Net): T {
     return net.retrofit.create(T::class.java)
@@ -18,7 +20,7 @@ fun <T> Single<T>.progress(isProgress: MutableLiveData<Boolean>): Single<T> =
                 .doOnError { isProgress.postValue(false) }
 
 
-fun Int.priceFormat() : String = DecimalFormat("#,###").format(this)
+fun Int.priceFormat(): String = DecimalFormat("#,###").format(this)
 
 fun View.showKeyBoard() {
     requestFocus()
@@ -31,3 +33,10 @@ fun View.hideKeyBoard() {
     imm.hideSoftInputFromWindow(windowToken, 0);
 }
 
+fun String.format(pattern: String): String {
+    val sdf = SimpleDateFormat(pattern, Locale.KOREA)
+    val newSdf = SimpleDateFormat("yyyy.MM.dd.", Locale.KOREA)
+    val date = sdf.parse(this)
+    date?.let { return newSdf.format(it) }
+    return ""
+}
