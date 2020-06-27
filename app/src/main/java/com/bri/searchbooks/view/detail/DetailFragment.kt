@@ -1,4 +1,4 @@
-package com.bri.searchbooks.view.main
+package com.bri.searchbooks.view.detail
 
 import android.content.Intent
 import android.net.Uri
@@ -13,9 +13,12 @@ import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseFragment
 import com.bri.searchbooks.data.Book
 import com.bri.searchbooks.databinding.DetailFrBinding
+import com.bri.searchbooks.view.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
+/**
+ * 상세 페이지
+ */
 class DetailFragment : BaseFragment() {
     override val vm: MainViewModel by sharedViewModel()
     private val book: Book? by lazy { arguments?.getParcelable<Book>(BOOK) }
@@ -35,6 +38,7 @@ class DetailFragment : BaseFragment() {
         vm.openWeb.observe(this, Observer { if (it.isNotEmpty()) openWeb(it) })
     }
 
+    // 외부 브라우저 호출
     private fun openWeb(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         vm.clearUrl()

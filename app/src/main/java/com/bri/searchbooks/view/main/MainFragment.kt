@@ -10,6 +10,7 @@ import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseFragment
 import com.bri.searchbooks.common.showKeyBoard
 import com.bri.searchbooks.databinding.MainFrBinding
+import com.bri.searchbooks.view.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -27,7 +28,7 @@ class MainFragment : BaseFragment() {
         super.onLoadOnce()
         binding.vm = vm
 
-        if(vm.list.isEmpty()) {
+        if (vm.list.isEmpty()) {
             binding.query.showKeyBoard()
         };
     }

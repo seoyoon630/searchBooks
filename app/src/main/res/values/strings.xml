@@ -1,8 +1,11 @@
 <resources>
+
+    <string name="kakao_key">KakaoAK a26fdc937e66259a7297f3a54b5db5ac</string>
     <string name="app_name">도서 검색</string>
     <string name="on_sale">정상판매</string>
 
     <string name="on_searching">다음 목록을 불러오는 중입니다.\n잠시만 기다려주세요.</string>
+    <string name="on_error">도서 목록을 불러오는 중에 오류가 발생했습니다. 다시 시도해주세요.</string>
     <string name="search_hint">책의 제목을 입력해주세요.</string>
     <string name="empty_result">검색 결과가 없습니다</string>
     <string name="detail_title">도서 상세</string>

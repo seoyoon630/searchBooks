@@ -4,9 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bri.searchbooks.view.main.MainActivity
+import com.bri.searchbooks.view.MainActivity
 import com.bri.searchbooks.view.main.adapter.MainAdapter
 
+/**
+ * MainAdapter, LayoutManager 연결
+ */
 class MainRecyclerView : RecyclerView {
 
     constructor(context: Context) : super(context)

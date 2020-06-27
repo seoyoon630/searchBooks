@@ -11,6 +11,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 
+/**
+ * BaseActivity
+ * BaseViewModel과 연결, 기본적인 로딩바 처리, 메세지 처리를 담당
+ */
 abstract class BaseActivity : AppCompatActivity() {
     abstract val vm: BaseViewModel
 
