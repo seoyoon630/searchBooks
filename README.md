@@ -47,3 +47,6 @@ Material
 ## Image Processing
 [Glide](https://github.com/bumptech/glide)
 
+## App Icon
+Icons made by DinosoftLabs from www.flaticon.com
+
