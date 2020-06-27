@@ -2,11 +2,13 @@ package com.bri.searchbooks.view.main
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.WindowManager
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseActivity
 import com.bri.searchbooks.data.Book
-import com.bri.searchbooks.view.main.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
@@ -21,13 +23,14 @@ class MainActivity : BaseActivity() {
 
     override fun onLoadOnce() {
         super.onLoadOnce()
-//        vm.backPressed.observe(this, EventObserver { onBackPressed() })
+        vm.backPressed.observe(this, Observer { onBackPressed() })
         vm.showDetail.observe(this, Observer { showDetail(it) })
 
         // splash
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.container, splashFr)
             commit()
+            updateStatusBarColor(SplashFragment.color)
         }
 
         // main
@@ -35,6 +38,7 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.container, mainFr)
                 commit()
+                updateStatusBarColor(MainFragment.color)
             }
         }, 1000)
     }
@@ -44,6 +48,14 @@ class MainActivity : BaseActivity() {
             replace(R.id.container, DetailFragment.newInstance(book))
             addToBackStack(null)
             commit()
+            updateStatusBarColor(DetailFragment.color)
+        }
+    }
+
+    private fun updateStatusBarColor(@ColorRes colorId: Int) {
+        window.apply {
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            statusBarColor = ContextCompat.getColor(this@MainActivity, colorId)
         }
     }
 }

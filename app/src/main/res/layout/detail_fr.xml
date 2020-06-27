@@ -11,6 +11,10 @@
         <variable
             name="book"
             type="com.bri.searchbooks.data.Book" />
+
+        <variable
+            name="vm"
+            type="com.bri.searchbooks.view.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +32,18 @@
             android:text="도서 상세"
             app:layout_constraintBottom_toTopOf="@id/content"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/shadow"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="@dimen/half_padding"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@id/header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/header"
+            app:setOnClick="@{vm::onBackPressed}" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/content"

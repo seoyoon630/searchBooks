@@ -69,24 +69,11 @@
             android:textColor="@color/price"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/status"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/author"
             app:layout_constraintVertical_bias="1"
             app:setPrice="@{data}"
             tools:text="22,500원" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_padding"
-            android:text="@{data.status}"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/price"
-            app:layout_constraintTop_toTopOf="@id/price"
-            tools:text="정상판매" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

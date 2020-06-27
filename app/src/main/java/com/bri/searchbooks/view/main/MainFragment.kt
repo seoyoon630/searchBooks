@@ -40,5 +40,7 @@ class MainFragment : BaseFragment() {
                 exitTransition = Explode()
             }
         }
+
+        const val color = R.color.bg
     }
 }

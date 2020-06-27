@@ -50,6 +50,12 @@ object BindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("app:setOnClick")
+    fun setOnClick(v: View, function: () -> Unit) {
+        v.setOnClickListener { function() }
+    }
+
+    @JvmStatic
     @BindingAdapter("app:setStrikeThrough")
     fun setStrikeThrough(v: TextView, flag: Boolean) {
         if(flag) v.paintFlags = v.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

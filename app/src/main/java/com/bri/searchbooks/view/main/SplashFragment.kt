@@ -14,5 +14,6 @@ class SplashFragment() : Fragment() {
 
     companion object {
         fun newInstance(): SplashFragment = SplashFragment()
+        const val color = R.color.colorAccent
     }
 }

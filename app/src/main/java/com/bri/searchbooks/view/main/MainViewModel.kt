@@ -23,6 +23,9 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
     private val _showDetail = MutableLiveData<Book>()
     val showDetail: LiveData<Book> get() = _showDetail
 
+    private val _backPressed = MutableLiveData<Boolean>()
+    val backPressed: LiveData<Boolean> get() = _backPressed
+
     fun updateQuery() {
         this.query = inputQuery
         page = 0
@@ -52,5 +55,9 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
 
     fun showDetail(book: Book) {
         _showDetail.postValue(book)
+    }
+
+    fun onBackPressed(){
+        _backPressed.postValue(true)
     }
 }
