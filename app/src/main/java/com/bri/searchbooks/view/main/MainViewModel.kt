@@ -36,19 +36,17 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
             page++
             isSearching = true
 
-            repository.getBookList(pQuery, page).subscribeOn(Schedulers.io()).apply {
-                if (page == 1) progress(_isProgress)
-                subscribe({ result ->
-                if (isEnd.get() != result.meta.is_end) isEnd.set(result.meta.is_end)    // 마지막 페이지 처리
-                list.addAll(result.list)        // 목록 처리
-                if (result.list.isEmpty()) list.add(null)
-                else list.remove(null)
-                isSearching = false
-            }, { e ->
-                e.printStackTrace()
-                isSearching = false
-            })
-            }
+            repository.getBookList(pQuery, page).subscribeOn(Schedulers.io()).progress(if (page == 1) _isProgress else null)
+                    .subscribe({ result ->
+                        if (isEnd.get() != result.meta.is_end) isEnd.set(result.meta.is_end)    // 마지막 페이지 처리
+                        list.addAll(result.list)        // 목록 처리
+                        if (result.list.isEmpty()) list.add(null)
+                        else list.remove(null)
+                        isSearching = false
+                    }, { e ->
+                        e.printStackTrace()
+                        isSearching = false
+                    })
         } else if (isSearching && list.isNotEmpty()) _message.postValue(R.string.on_searching)
     }
 

@@ -14,13 +14,13 @@ inline fun <reified T> createNetService(net: Net): T {
     return net.retrofit.create(T::class.java)
 }
 
-fun <T> Single<T>.progress(isProgress: MutableLiveData<Boolean>): Single<T> =
-        this.doOnSubscribe { isProgress.postValue(true) }
-                .doOnSuccess { isProgress.postValue(false) }
-                .doOnError { isProgress.postValue(false) }
+fun <T> Single<T>.progress(isProgress: MutableLiveData<Boolean>?): Single<T> =
+        this.doOnSubscribe { isProgress?.postValue(true) }
+                .doOnSuccess { isProgress?.postValue(false) }
+                .doOnError { isProgress?.postValue(false) }
 
 
-fun Int.priceFormat(): String = DecimalFormat("#,###").format(this)
+fun Int.priceFormat(): String = DecimalFormat("#,###").format(this)+"원"
 
 fun View.showKeyBoard() {
     requestFocus()
@@ -40,3 +40,5 @@ fun String.format(pattern: String): String {
     date?.let { return newSdf.format(it) }
     return ""
 }
+
+fun String.addSuffix(suffix : String) : String = this + suffix

@@ -1,6 +1,7 @@
 package com.bri.searchbooks.common
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -25,7 +26,7 @@ object BindingAdapters {
     @BindingAdapter("app:listToText")
     fun setListToText(v: TextView, list: ArrayList<String>?) {
         val sb = StringBuilder()
-        list?.let { sb.append(it.joinToString(", ")) }
+        list?.let { sb.append(it.joinToString("\n")) }
         v.text = sb.toString()
     }
 
@@ -46,6 +47,20 @@ object BindingAdapters {
     @BindingAdapter("app:setRelatedEditText")
     fun setRelatedEditText(v: View, editText: EditText) {
         v.setOnClickListener { editText.text.clear() }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:setStrikeThrough")
+    fun setStrikeThrough(v: TextView, flag: Boolean) {
+        if(flag) v.paintFlags = v.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:noBreakText")
+    fun noBreakText(v: TextView, string: String?) {
+        string?.let {
+            v.text = it.replace(" ", "\u00A0").replace("-", "\u2011").replace("/", "\u2215")
+        }
     }
 
     @JvmStatic

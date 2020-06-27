@@ -56,8 +56,8 @@ object MainBindingAdapters {
             val onSaleStatusName = v.context.resources.getString(R.string.on_sale)
 
             v.text =
-                    if (it.status == onSaleStatusName) salePrice + "원"
-                    else originalPrice + "원"
+                    if (it.status == onSaleStatusName) salePrice
+                    else originalPrice
         }
     }
 
