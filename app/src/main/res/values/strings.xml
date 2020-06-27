@@ -5,5 +5,12 @@
     <string name="on_searching">다음 목록을 불러오는 중입니다.\n잠시만 기다려주세요.</string>
     <string name="search_hint">책의 제목을 입력해주세요.</string>
     <string name="empty_result">검색 결과가 없습니다</string>
+    <string name="detail_title">도서 상세</string>
+    <string name="isbn">ISBN</string>
+    <string name="publisher">출판</string>
+    <string name="translator">역자</string>
+    <string name="author">저자</string>
+    <string name="introduction">책 소개</string>
+    <string name="web">웹에서 보기</string>
 
 </resources>

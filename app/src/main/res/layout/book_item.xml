@@ -22,7 +22,6 @@
         android:layout_marginBottom="@dimen/half_padding"
         android:background="@drawable/rounded_rect"
         android:padding="@dimen/default_padding"
-        android:transitionGroup="true"
         app:isOnSale="@{data}">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -39,11 +38,9 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/title"
             android:layout_marginStart="@dimen/default_padding"
             android:text="@{data.title}"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/thumbnail"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,10 +48,9 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/author"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/content"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="@dimen/half_padding"
-            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title"
@@ -63,11 +59,10 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            style="@style/content"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="@dimen/default_padding"
             android:textColor="@color/price"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/author"

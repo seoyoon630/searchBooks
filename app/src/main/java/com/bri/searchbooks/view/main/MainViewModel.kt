@@ -26,6 +26,9 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
     private val _backPressed = MutableLiveData<Boolean>()
     val backPressed: LiveData<Boolean> get() = _backPressed
 
+    private val _openWeb = MutableLiveData<String>()
+    val openWeb: LiveData<String> get() = _openWeb
+
     fun updateQuery() {
         this.query = inputQuery
         page = 0
@@ -59,5 +62,13 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
 
     fun onBackPressed(){
         _backPressed.postValue(true)
+    }
+
+    fun openWeb(url: String){
+        _openWeb.postValue(url)
+    }
+
+    fun clearUrl(){
+        _openWeb.postValue("")
     }
 }

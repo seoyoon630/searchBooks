@@ -1,16 +1,20 @@
 package com.bri.searchbooks.view.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.transition.Slide
+import androidx.lifecycle.Observer
+import androidx.transition.Fade
 import com.bri.searchbooks.R
 import com.bri.searchbooks.base.BaseFragment
 import com.bri.searchbooks.data.Book
 import com.bri.searchbooks.databinding.DetailFrBinding
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+
 
 class DetailFragment : BaseFragment() {
     override val vm: MainViewModel by sharedViewModel()
@@ -27,6 +31,14 @@ class DetailFragment : BaseFragment() {
         super.onLoadOnce()
         binding.book = book
         binding.vm = vm
+
+        vm.openWeb.observe(this, Observer { if (it.isNotEmpty()) openWeb(it) })
+    }
+
+    private fun openWeb(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        vm.clearUrl()
+        startActivity(intent)
     }
 
     companion object {
@@ -36,7 +48,7 @@ class DetailFragment : BaseFragment() {
             }
             return DetailFragment().apply {
                 arguments = bundle
-                enterTransition = Slide()
+                enterTransition = Fade()
                 reenterTransition = null
             }
         }

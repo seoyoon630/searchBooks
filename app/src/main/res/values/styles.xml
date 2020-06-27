@@ -29,4 +29,25 @@
         <item name="android:layout_marginBottom">@dimen/half_padding</item>
     </style>
 
+    <style name="default_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="title" parent="default_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="label" parent="default_text">
+        <item name="android:layout_marginTop">@dimen/half_padding</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="content" parent="default_text">
+        <item name="android:layout_marginStart">@dimen/half_padding</item>
+    </style>
+
+
 </resources>

@@ -18,6 +18,10 @@ class MainAdapter(val onItemClick: (book: Book) -> Unit) : BaseAdapter<Book?>() 
     private var _lastVisibleIndex = -1
     private val queueOfView: Queue<Pair<Int, View>> = LinkedList()
 
+    init {
+        setHasStableIds(true)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder<Book?> {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
