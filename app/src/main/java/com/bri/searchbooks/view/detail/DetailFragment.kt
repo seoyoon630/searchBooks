@@ -35,7 +35,7 @@ class DetailFragment : BaseFragment() {
         binding.book = book
         binding.vm = vm
 
-        vm.openWeb.observe(this, Observer { if (it.isNotEmpty()) openWeb(it) })
+        vm.openWeb.observe(viewLifecycleOwner, Observer { if (it.isNotEmpty()) openWeb(it) })
     }
 
     // 외부 브라우저 호출

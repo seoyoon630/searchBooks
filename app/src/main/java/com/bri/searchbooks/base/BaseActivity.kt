@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
  * BaseViewModel과 연결, 기본적인 로딩바 처리, 메세지 처리를 담당
  */
 abstract class BaseActivity : AppCompatActivity() {
-    abstract val vm: BaseViewModel
+    abstract val vm: BaseViewModel?
 
     private val mProgress by lazy { createProgress() }
     private val rootView by lazy { window.decorView.findViewById<View>(android.R.id.content) }
@@ -28,8 +28,8 @@ abstract class BaseActivity : AppCompatActivity() {
         onLoadOnce()
         onLoad()
 
-        vm.isProgress.observe(this, Observer { it?.let { isProgress -> if (isProgress) showProgress(); else dismissProgress() } })
-        vm.message.observe(this, Observer { it?.let { message -> showSnackBar(message = resources.getString(message)) } })
+        vm?.isProgress?.observe(this, Observer { it?.let { isProgress -> if (isProgress) showProgress(); else dismissProgress() } })
+        vm?.message?.observe(this, Observer { it?.let { message -> showSnackBar(message = resources.getString(message)) } })
     }
 
     open fun onBind() {}
